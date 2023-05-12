@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+int main() {
+    int balance = 1000;  // Starting balance
+    int pin = 1234;  // Default PIN
+
+    // Prompt the user to enter their PIN
+    int user_pin;
+    printf("Please enter your PIN: ");
+    scanf("%d", &user_pin);
+
+    // Check if the entered PIN is correct
+    if (user_pin != pin) {
+        printf("Invalid PIN. Exiting...\n");
+        return 0;
+    }
+
+    // Display the menu and prompt the user for their choice
+    int choice;
+    do {
+        printf("\n");
+        printf("1. View Balance\n");
+        printf("2. Deposit Money\n");
+        printf("3. Withdraw Money\n");
+        printf("4. Change PIN\n");
+        printf("5. Exit\n");
+        printf("\n");
+        printf("Please select an option: ");
+        scanf("%d", &choice);
+
+        // Perform the selected operation
+        switch (choice) {
+            case 1:  // View Balance
+                printf("Your current balance is $%d\n", balance);
+                break;
+            case 2: {  // Deposit Money
+                int amount;
+                printf("Please enter the amount to deposit: $");
+                scanf("%d", &amount);
+                balance += amount;
+                printf("Deposit of $%d successful. Your new balance is $%d\n", amount, balance);
+                break;
+            }
+            case 3: {  // Withdraw Money
+                int amount;
+                printf("Please enter the amount to withdraw: $");
+                scanf("%d", &amount);
+                if (amount > balance) {
+                    printf("Insufficient funds. Please try again.\n");
+                } else {
+                    balance -= amount;
+                    printf("Withdrawal of $%d successful. Your new balance is $%d\n", amount, balance);
+                }
+                break;
+            }
+            case 4: {  // Change PIN
+                int new_pin;
+                printf("Please enter your new PIN: ");
+                scanf("%d", &new_pin);
+                pin = new_pin;
+                printf("PIN changed successfully.\n");
+                break;
+            }
+            case 5:  // Exit
+                printf("Thank you for using our ATM. Goodbye!\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+                break;
+        }
+    } while (1);
+
+    return 0;
+}
